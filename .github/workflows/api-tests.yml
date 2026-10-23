@@ -21,6 +21,13 @@ jobs:
       - name: Instalar Newman
         run: npm install -g newman newman-reporter-htmlextra
 
+ 
+      - name: Correr la colección
+        run: >
+          newman run postman/collection.json
+          -r cli,htmlextra
+          --reporter-htmlextra-export reports/report.html        
+
       - name: Guardar reporte
         if: always()
         uses: actions/upload-artifact@v4
