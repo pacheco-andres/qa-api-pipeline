@@ -1,0 +1,80 @@
+{
+  "info": {
+    "_postman_id": "b579b6fb-0c2d-487a-9ebb-226a41f9652a",
+    "name": "Mi primera API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "7873627"
+  },
+  "item": [
+    {
+      "name": "Get post 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Tiene id\", () => pm.expect(pm.response.json()).to.have.property(\"id\"));",
+              "pm.test(\"El id es 1\", () => pm.expect(pm.response.json().id).to.eql(1));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_api}}/posts/1",
+          "host": [
+            "{{base_url_api}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Regresa una lista de 10 usuarios\", () => {",
+              "    const users = pm.response.json();",
+              "    pm.expect(users).to.be.an(\"array\");",
+              "    pm.expect(users.length).to.eql(10);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_api}}/users",
+          "host": [
+            "{{base_url_api}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url_api",
+      "value": "https://jsonplaceholder.typicode.com"
+    }
+  ]
+}
